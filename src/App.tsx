@@ -4,6 +4,7 @@ import { Footer } from './components/Footer/Footer'
 import { Home } from './pages/Home/Home'
 import { About } from './pages/About/About'
 import { Products } from './pages/Products/Products'
+import { Protected } from './utils/Protected'
 
 function App() {
   return (
@@ -20,7 +21,12 @@ function App() {
       >
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>} />
-      <Route path="/products" element={<Products/>} />
+      <Route path="/products" 
+      element={
+      <Protected isLoggedIn={true}>
+        <Products/>
+      </Protected>
+      } />
 </Route>
       </Routes>
     </>
