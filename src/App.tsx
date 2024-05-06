@@ -5,10 +5,13 @@ import { Home } from './pages/Home/Home'
 import { About } from './pages/About/About'
 import { Products } from './pages/Products/Products'
 import { Protected } from './utils/Protected'
+import { AuthProvider } from './context/AuthContext'
+import { Login } from './pages/Login/Login'
 
 function App() {
   return (
     <>
+    <AuthProvider>
     <Routes>
       <Route
       element={
@@ -22,13 +25,15 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>} />
       <Route path="/products" 
-      element={
-      <Protected isLoggedIn={true}>
-        <Products/>
-      </Protected>
-      } />
-</Route>
+        element={
+        <Protected isLoggedIn={true}>
+          <Products/>
+        </Protected>
+        } />
+      </Route>
+      <Route path="/login" element={<Login/>} />
       </Routes>
+      </AuthProvider>
     </>
   )
 }

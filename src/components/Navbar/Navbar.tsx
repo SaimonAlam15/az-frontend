@@ -1,6 +1,13 @@
+import { useContext } from 'react';
+
+import AuthContext from '../../context/AuthContext';
+import './Navbar.css'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const Navbar = () => {
+  const {user, logout} = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -20,10 +27,16 @@ export const Navbar = () => {
           <a className="nav-link" href="/products">Products</a>
         </li>
       </ul>
-      <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div className="nav-item" id="auth-div">
+        {user && <p>Welcome {user.first_name}</p>}
+        <p>
+          {user ? (
+            <p className="nav-link" onClick={logout}>Logout</p>
+          ) : (
+          <a type="button" className="btn btn-primary" href="/login" target="_blank">Login/Register</a>
+          )}
+        </p>
+      </div>
     </div>
   </div>
 </nav>
